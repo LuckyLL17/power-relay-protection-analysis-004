@@ -11,6 +11,9 @@
 - 保护动作序列重放、选择性判断、拒动/后备保护识别
 - 定值版本校验、设备检修试验和分析审批
 - 故障事件、录波、拓扑变更与审批审计追踪
+- 故障证据包：按事件时刻截取事件、录波、拓扑、定值、动作序列与审计快照，生成规范化只读内容与 SHA-256 指纹，支持封存与校验；缺少分析、录波不存在或来源晚于事件时明确失败，重复创建幂等，封存后源数据变化在校验中明确报漂移且不改包
+
+证据包接口：`POST /api/evidence-packages`（按 eventId 封存，幂等）、`GET /api/evidence-packages`、`GET /api/evidence-packages/:id`、`POST /api/evidence-packages/:id/verify`。场景验证：`npm run verify:evidence`。
 
 默认端口：`6311`。
 

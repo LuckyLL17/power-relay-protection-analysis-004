@@ -5,3 +5,4 @@ export type ProtectionDevice = { id: string; name: string; type: 'distance' | 'o
 export type FaultEvent = { id: string; lineId: string; occurredAt: string; fault: any; location: any; source: string; status: string };
 export type Recording = { id: string; name: string; lineId: string; triggerTimeMs: number; sampleRateHz: number; samples: Sample[]; quality: any; createdAt: string; status: string };
 export type AuditEntry = { id: string; time: string; action: string; entity: string; payload: any };
+export type EvidencePackage = { id: string; eventId: string; analysisId: string; recordingId: string; status: 'sealed'; algorithm: 'sha256'; fingerprint: string; content: any; sealedAt: string; sealedBy: string; handoverTo: string | null };
