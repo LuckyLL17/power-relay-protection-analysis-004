@@ -5,3 +5,26 @@ export type ProtectionDevice = { id: string; name: string; type: 'distance' | 'o
 export type FaultEvent = { id: string; lineId: string; occurredAt: string; fault: any; location: any; source: string; status: string };
 export type Recording = { id: string; name: string; lineId: string; triggerTimeMs: number; sampleRateHz: number; samples: Sample[]; quality: any; createdAt: string; status: string };
 export type AuditEntry = { id: string; time: string; action: string; entity: string; payload: any };
+export type EvidencePackageStatus = 'generated' | 'sealed';
+export type EvidencePackageContent = {
+  schemaVersion: '1.0';
+  eventId: string;
+  eventOccurredAt: string;
+  event: FaultEvent;
+  recordings: Recording[];
+  topology: { substations: any[]; lines: any[]; breakers: Breaker[]; devices: ProtectionDevice[]; asOfChanges: any[] };
+  settings: { devices: ProtectionDevice[]; snapshots: any[] };
+  analyses: any[];
+  audits: AuditEntry[];
+};
+export type EvidencePackage = {
+  id: string;
+  eventId: string;
+  schemaVersion: '1.0';
+  status: EvidencePackageStatus;
+  createdAt: string;
+  content: EvidencePackageContent;
+  fingerprints: { algorithm: 'sha256'; content: string; sections: Record<string, string> };
+  sealedAt?: string;
+  sealedBy?: string;
+};
